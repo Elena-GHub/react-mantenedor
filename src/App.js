@@ -9,10 +9,11 @@ class App extends Component {
     path: 'list',
   }
   render() {
+    const { path } = this.state
     return (
       <div className="App">
-        <ViewList />
-        <UserForm />
+        {path === 'list' && <ViewList />}
+        {path === 'form' && <UserForm />}
       </div>
     );
   }
