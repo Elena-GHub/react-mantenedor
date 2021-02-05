@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 export default class List extends Component {
     render() {
         return(
-            'List'
+            <ul>
+                <li>User 1 <button>Edit</button></li>
+                <li>User 2 <button>Edit</button></li>
+            </ul>
         )
     }
 }
