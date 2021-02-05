@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import Header from './Header'
+import List from './List'
 
 export default class ViewList extends Component {
     render() {
         return (
-            'List View'
+            <div>
+                <Header />
+                <List />
+            </div>
         )
     }
 }
