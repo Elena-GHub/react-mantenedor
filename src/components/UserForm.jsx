@@ -11,7 +11,7 @@ const validate = values => {
     if (!values.website) {
         errors.website = "This field must be filled in"
     }
-    
+
     return errors
 }
 
@@ -32,6 +32,8 @@ export default class UserForm extends Component {
         const result = validate(noErrors)
         this.setState({ errors: result })
         if (!Object.keys(result).length) {
+            const { handleSubmit } = this.props
+            handleSubmit(noErrors)
             // send form
             e.target.reset()
         }

@@ -8,7 +8,7 @@ import ViewList from './components/ViewList'
 class App extends Component {
   state = {
     data: [],
-    path: 'form',
+    path: 'list',
   }
   
   constructor() {
@@ -24,6 +24,17 @@ class App extends Component {
     })
   }
 
+  addNewUser = user => {
+    axios.post('https://jsonplaceholder.typicode.com/users', user)
+    .then(({ data }) => {
+        const newData = this.state.data.concat(data)
+        this.setState({
+          data: newData,
+          path: 'list',
+        })
+      })
+  }
+
   createNewUser = () => {
     this.setState({ path: 'form' })
   }
@@ -37,7 +48,7 @@ class App extends Component {
           handleClick={this.selectUser}
           data={data}
         />}
-        {path === 'form' && <UserForm />}
+        {path === 'form' && <UserForm handleSubmit={this.addNewUser} />}
       </div>
     );
   }
