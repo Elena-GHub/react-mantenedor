@@ -20,6 +20,14 @@ export default class UserForm extends Component {
         errors: {}
     }
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            ...this.state,
+            ...props.initialValues,
+        }
+    }
+
     handleChange = ({ target }) => {
         this.setState({
             [target.name]: target.value,
@@ -30,24 +38,30 @@ export default class UserForm extends Component {
         e.preventDefault()
         const { errors, ...noErrors } = this.state
         const result = validate(noErrors)
-        this.setState({ errors: result })
+
         if (!Object.keys(result).length) {
-            const { handleSubmit } = this.props
-            handleSubmit(noErrors)
-            // send form
-            e.target.reset()
+            const { handleSubmit, handleUpdate, initialValues } = this.props
+            if (initialValues.id) {
+                handleUpdate(initialValues.id, noErrors)
+            } else {
+                handleSubmit(noErrors)
+            }
+        } else {
+            this.setState({ errors: result })
         }
     }
 
     render() {
         const { errors } = this.state
+        const { initialValues } = this.props
+
         return (
             <form onSubmit={this.handleSubmit}>
-                <input placeholder="Name" name="name" onChange={this.handleChange} />
+                <input defaultValue={initialValues.name} placeholder="Name" name="name" onChange={this.handleChange} />
                 {errors.name && <p>{errors.name}</p>}
-                <input placeholder="Email" name="email" onChange={this.handleChange} />
+                <input defaultValue={initialValues.email} placeholder="Email" name="email" onChange={this.handleChange} />
                 {errors.email && <p>{errors.email}</p>}
-                <input placeholder="Website" name="website" onChange={this.handleChange} />
+                <input defaultValue={initialValues.website} placeholder="Website" name="website" onChange={this.handleChange} />
                 {errors.website && <p>{errors.website}</p>}
                 <input type="submit" value="Send" />
             </form>
