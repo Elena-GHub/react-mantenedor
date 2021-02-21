@@ -8,7 +8,7 @@ import ViewList from './components/ViewList'
 class App extends Component {
   state = {
     data: [],
-    path: 'list',
+    path: 'form',
   }
   
   constructor() {
