@@ -4,10 +4,10 @@ import List from './List'
 
 export default class ViewList extends Component {
     render() {
-        const { data, handleClick } = this.props
+        const { data, handleClick, createNewUser } = this.props
         return (
             <div>
-                <Header />
+                <Header createNewUser={createNewUser} />
                 <List data={data} handleClick={handleClick}/>
             </div>
         )

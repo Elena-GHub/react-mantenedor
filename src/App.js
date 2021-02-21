@@ -23,11 +23,17 @@ class App extends Component {
       selectedUser: id,
     })
   }
+
+  createNewUser = () => {
+    this.setState({ path: 'form' })
+  }
+
   render() {
     const { path, data } = this.state
     return (
       <div className="App">
         {path === 'list' && <ViewList 
+          createNewUser={this.createNewUser}
           handleClick={this.selectUser}
           data={data}
         />}
